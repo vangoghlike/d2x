@@ -1,0 +1,23 @@
+:root {
+    --root-font-color:#000000;
+    --menu-font-color:#000000;
+    --primary-color-green: #4DF293;
+    --primary-color-blue: #6A77F0;
+    --bg: #1B1E2C;
+    --panel: #151a2a;
+    --panel2: #1c2238;
+    --panel3: #0c1122;
+    --text: #EAEFED;
+    --muted: #9aa3c8;
+    --accent: #7aa2ff;
+    --accent2: #b073ff;
+    --danger: #ff6b6b;
+    --border: rgba(54, 54, 57, 1);
+    --radius: 14px;
+    --shadow: 0 8px 24px rgba(0, 0, 0, .35);
+    --basic-font-famaily:"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+
+    --right-top-h: 480px;     /* 상단 고정 높이 (원하면 수치만 바꿔) */
+    --right-bottom-h: 89px;   /* 하단 고정 높이 */
+    --card-w: 440px;
+}

@@ -1,0 +1,36 @@
+<section class="layer layer-center" data-page="edit" data-layer="content-picker" role="dialog" aria-modal="true" aria-labelledby="pickerTitle">
+  <div class="layer-mask"></div>
+  <div class="layer-dialog lg">
+    <header class="layer-head has-tabs">
+      <h3 id="pickerTitle" class="layer-title">콘텐츠 편집</h3>
+      <p class="layer-notice">상업적인 목적(수익창출) 이용하시면 저작권을 침해할 수 있습니다.</p>
+      <nav class="tabs" role="tablist">
+        <button class="tab is-active" role="tab" aria-selected="true" data-tab="naver">네이버 이미지</button>
+        <button class="tab" role="tab" data-tab="stock">스톡 이미지</button>
+        <button class="tab" role="tab" data-tab="video">비디오</button>
+        <button class="tab" role="tab" data-tab="gif">GIF</button>
+        <button class="tab" role="tab" data-tab="upload">직접 업로드</button>
+      </nav>
+      <button class="layer-close" aria-label="닫기">×</button>
+    </header>
+
+    <div class="picker-tools">
+      <label class="search">
+        <input type="search" class="input" placeholder="ex) 반딧불 이미지">
+        <button class="icon" aria-label="검색">🔍</button>
+      </label>
+      <div class="toolbar">
+        <!-- 필요한 추가 필터/정렬 자리 -->
+      </div>
+    </div>
+
+    <div class="picker-body scroll">
+      <div class="placeholder">기존 대로 콘텐츠 출력</div>
+    </div>
+
+    <footer class="layer-actions">
+      <button class="btn btn-ghost" data-act="cancel">취소</button>
+      <button class="btn btn-primary" data-act="apply">적용하기</button>
+    </footer>
+  </div>
+</section>

@@ -1,0 +1,75 @@
+html,body{height:100%}
+body{
+    margin:0; font-family: var(--basic-font-famaily);
+    color:var(--text);
+    /* abstract background */
+    background:
+            radial-gradient(1200px 600px at 70% -10%, rgba(51, 255, 204, .08), transparent 60%),
+            radial-gradient(900px 500px at 40% 110%, rgba(21, 128, 61, .08), transparent 60%),
+            radial-gradient(700px 600px at 50% 40%, rgba(59, 130, 246, .06), transparent 70%),
+            #0c1220;
+    overflow:auto;
+}
+
+.center{
+    min-height:100%;
+    display:grid; place-items:center;
+    padding:40px 16px;
+}
+
+.stack{display:grid; gap:16px; place-items:center}
+.logo{height:30px; opacity:.95}
+
+.auth-card{
+    width:var(--card-w);
+    background:rgba(18, 26, 43, .86);
+    border:1px solid var(--border);
+    border-radius:12px;
+    box-shadow:var(--shadow);
+    padding:18px 20px 16px;
+    backdrop-filter: blur(6px);
+}
+
+.auth-head{display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:10px}
+.auth-title{font-weight:900; font-size:18px}
+.auth-links{display:flex; gap:10px; margin-left:10px; color:#cfe1ff}
+.auth-links a{color:#cfe1ff; text-decoration:none; font-weight:700; opacity:.9}
+.auth-links .sep{opacity:.5}
+
+.social{display:grid; gap:10px; margin-top:12px}
+.sbtn{
+    display:flex; align-items:center; gap:10px; height:42px;
+    background:#2a3044; border:1px solid var(--border); border-radius:10px;
+    color:#e8ecff; font-weight:800; justify-content:center; cursor:pointer;
+}
+.sbtn .ico{
+    width:18px; height:18px; border-radius:50%; display:inline-grid; place-items:center;
+    font-size:12px; color:#000; background:#fff;
+}
+.sbtn.kakao .ico{background:#fee500}
+.sbtn.naver .ico{background:#2db400; color:#fff}
+
+.sep{
+    display:flex; align-items:center; gap:12px; margin:14px 0;
+    color:#aeb7d6; font-size:12px;
+}
+.sep::before,.sep::after{content:""; height:1px; flex:1; background:var(--border)}
+
+.input{width:100%; background:#0f1320; border:1px solid var(--border); color:#e8ecff;
+    border-radius:10px; height:42px; padding:0 12px; outline:none}
+.input::placeholder{color:#7c86a8}
+
+.form{display:grid; gap:10px}
+.btn{
+    height:42px; border-radius:10px; border:1px solid rgba(255,255,255,.12);
+    background:linear-gradient(180deg,#3b82f6,#2563eb); color:#fff;
+    font-weight:800; cursor:pointer;
+}
+.btn:disabled{
+    cursor:not-allowed; opacity:.6; filter:grayscale(.2);
+}
+
+.agree{
+    margin-top:12px; color:#93a0c4; font-size:12px; text-align:center;
+}
+.agree a{color:#cfe1ff; text-decoration:underline}

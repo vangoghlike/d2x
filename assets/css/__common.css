@@ -1,0 +1,52 @@
+
+/*align*/
+.lh1{ line-height: 1}
+.tac{ text-align: center}
+.tal{ text-align: left}
+.tar{ text-align: right}
+.flex{ display: flex; flex-wrap: wrap}
+.flex-col{ display: flex; flex-direction: column;}
+.inline-flex {display: inline-flex !important; flex-wrap: wrap}
+.flex-jc{ display: flex; flex-wrap: wrap; justify-content: center}
+.flex-js{ display: flex; flex-wrap: wrap; justify-content: flex-start}
+.flex-je{ display: flex; flex-wrap: wrap; justify-content: flex-end}
+.flex-jl{ display: flex; flex-wrap: wrap; justify-content: left}
+.flex-jr{ display: flex; flex-wrap: wrap; justify-content: right}
+.flex-jsb{ display: flex; flex-wrap: wrap; justify-content: space-between}
+.flex-jsa{ display: flex; flex-wrap: wrap; justify-content: space-around}
+.flex-ac{ display: flex; flex-wrap: wrap; align-items: center}
+.flex-ae{ display: flex; flex-wrap: wrap; align-items: flex-end}
+.flex-afs { display: flex; flex-wrap: wrap; align-items: flex-start}
+.flex-ast { display: flex; align-items: stretch}
+.flex-nowrap{ display: flex; flex-wrap: nowrap;}
+.flex-now{ display: flex}
+.flex-now-jc{ display: flex; justify-content: center}
+.flex-now-jsb{ display: flex; justify-content: space-between}
+.flex-now-jsa{ display: flex; justify-content: space-around}
+
+/* color */
+.fc-primary-green {
+    color:var(--primary-color-green);
+}
+.fc-primary-blue {
+    color:var(--primary-color-blue);
+}
+
+hr {
+    height: 1px;
+    background: var(--border);
+    border:none;
+}
+
+.absol {
+    position: absolute;
+}
+.relative {
+    position: relative;
+}
+.sticky {
+    position: sticky;
+}
+.fixed {
+    position: fixed;
+}

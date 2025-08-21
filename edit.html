@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>편집화면</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="stylesheet" href="assets/css/__root.css" />
+    <link rel="stylesheet" href="assets/css/__reset.css" />
+    <link rel="stylesheet" href="assets/css/__animation.css" />
+    <link rel="stylesheet" href="assets/css/__common.css" />
+    <link rel="stylesheet" href="assets/css/edit.css" />
+</head>
+
+<body>
+    <div class="app">
+
+        <!-- 왼쪽 : 클립 생성 (교체) -->
+        <aside class="panel left">
+            <div class="left-head sticky">
+                <h2 class="left-title title tal fc-primary-green">클립 생성</h2>
+                <nav class="left-tabs" role="tablist" aria-label="입력 방식">
+                    <button class="tab active" data-tab="url">URL</button>
+                    <button class="tab" data-tab="prompt">프롬프트</button>
+                    <button class="tab" data-tab="paste">붙여넣기</button>
+                </nav>
+            </div>
+
+            <div class="left-body">
+                <!-- URL 입력 -->
+                <form class="tab-pane active" id="tab-url" autocomplete="off">
+                    <div class="input-wrap">
+                        <input type="url" class="input-url" id="url-input" placeholder="https://kmong.com/thankyou?charge_type=DIRECay_typl" />
+                        <button type="button" class="input-icon close-link" aria-label="링크 닫기">
+                            <img src="assets/img/ico/ico-round-close-gray.svg" alt="닫기">
+                        </button>
+                    </div>
+
+                    <div class="support-box">
+                        <p class="support-title">현재는 아래 사이트의 URL만 지원 가능합니다.</p>
+                        <p class="support-links">
+                            <a href="#">네이버 블로그</a>
+                            <span class="dot">·</span>
+                            <a href="#">브런치 스토리</a>
+                            <span class="dot">·</span>
+                            <a href="#">티스토리</a>
+                        </p>
+                    </div>
+
+                    <button type="button" class="btn-primary wide" id="btn-make-clips">
+                        <span class="btn-ico" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="4" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.6" />
+                                <rect x="14" y="4" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.6" />
+                                <rect x="3" y="15" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.6" />
+                                <rect x="14" y="15" width="7" height="7" rx="2" stroke="currentColor" stroke-width="1.6" />
+                            </svg>
+                        </span>
+                        <span>
+                            클립 생성하기
+                        </span>
+                    </button>
+                </form>
+
+                <!-- 프롬프트 -->
+                <form class="tab-pane" id="tab-prompt">
+                    <label class="label">주제</label>
+                    <input type="text" class="input" placeholder="예) 서울 맛집 5곳" />
+
+                    <label class="label mt8">톤 & 지시</label>
+                    <textarea class="textarea" rows="6" placeholder="뉴스 앵커 톤, 한 문장 40자 이하"></textarea>
+
+                    <div class="row mt10">
+                        <label class="switch-row"><input type="checkbox" checked /><span>자동 문장 분할</span></label>
+                        <label class="switch-row"><input type="checkbox" /><span>이모지 사용</span></label>
+                    </div>
+
+                    <button type="button" class="btn-primary wide mt10">클립 생성하기</button>
+                </form>
+
+                <!-- 붙여넣기 -->
+                <form class="tab-pane" id="tab-paste">
+                    <label class="label">원문 텍스트</label>
+                    <textarea class="textarea" rows="10" placeholder="여기에 붙여넣으면 문장 단위로 클립을 만듭니다."></textarea>
+                    <div class="row mt10">
+                        <label class="switch-row"><input type="checkbox" checked /><span>문장 끝 기준 자동 분할</span></label>
+                    </div>
+                    <button type="button" class="btn-primary wide mt10">클립 생성하기</button>
+                </form>
+            </div>
+
+            <!-- 하단 고정 영역 -->
+            <footer class="left-foot sticky">
+                <div class="left-foot-top">
+                    <div class="me">
+                        <span class="name">이영호</span>
+                        <span class="email">205angho@gmail.com</span>
+                        <span class="verified" aria-hidden="true"></span>
+                    </div>
+                    <nav class="links">
+                        <a href="#" class="link">회원정보</a>
+                        <span class="sep">|</span>
+                        <a href="#" class="link">로그아웃</a>
+                    </nav>
+                </div>
+                <div class="left-foot-bottom flex flex-jsb">
+
+                    <div class="logo">
+                        <img src="assets/img/comm/logo-gray.svg" alt="d2x 로고">
+                    </div>
+                    <span class="period">이용기간: 25.08.01 ~ 25.09.01</span>
+                    <span class="badge-green">D-365</span>
+                </div>
+            </footer>
+        </aside>
+
+        <!-- 가운데 : 클립 편집 -->
+        <main class="panel center">
+            <div class="container">
+                <div class="center-head sticky">
+                    <h2 class="center-title title tal fc-primary-green">클립 편집</h2>
+                </div>
+
+                <div class="panel-body">
+                    <div id="clipList" class="clip-list">
+
+                        <!-- Clip 1 -->
+                        <div class="clip" draggable="true" data-cidx="0">
+                            <div class="clip-index">1</div>
+                            <label class="thumb" title="썸네일 선택">
+                                <span>썸네일</span>
+                                <input type="file" accept="image/*" />
+                            </label>
+                            <div class="lines">
+                                <div class="line" draggable="true" data-cidx="0" data-lidx="0">
+                                    <div class="grip">≡</div>
+                                    <input class="input-line" maxlength="40" value="서울은 다양한 음식으로 가득한 매력의 도시입니다." />
+                                    <div class="actions">
+                                        <span class="counter">23/40</span>
+                                        <button type="button" class="icon" data-act="add">＋</button>
+                                        <button type="button" class="icon" data-act="del">✕</button>
+                                    </div>
+                                </div>
+                                <div class="line" draggable="true" data-cidx="0" data-lidx="1">
+                                    <div class="grip">≡</div>
+                                    <input class="input-line" maxlength="40" value="그중에서도 한국식 중화요리의 대표 메뉴," />
+                                    <div class="actions">
+                                        <span class="counter">21/40</span>
+                                        <button type="button" class="icon" data-act="add">＋</button>
+                                        <button type="button" class="icon" data-act="del">✕</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clip-side">
+                                <div class="badge-time">59"</div>
+                            </div>
+
+                            <button type="button" class="btn small btn-del-clip absol" data-act="clip-del"><img src="assets/img/ico/ico-close-gray.svg" alt="닫기"></button>
+                        </div>
+
+                        <!-- Clip 2 -->
+                        <div class="clip" draggable="true" data-cidx="1">
+                            <div class="clip-index">2</div>
+                            <label class="thumb" title="썸네일 선택">
+                                <span>썸네일</span>
+                                <input type="file" accept="image/*" />
+                            </label>
+                            <div class="lines">
+                                <div class="line" draggable="true" data-cidx="1" data-lidx="0">
+                                    <div class="grip">≡</div>
+                                    <input class="input-line" maxlength="40" value="오늘은 서울에서 유명한 맛집 5곳을 소개합니다." />
+                                    <div class="actions">
+                                        <span class="counter">23/40</span>
+                                        <button type="button" class="icon" data-act="add">＋</button>
+                                        <button type="button" class="icon" data-act="del">✕</button>
+                                    </div>
+                                </div>
+                                <div class="line" draggable="true" data-cidx="1" data-lidx="1">
+                                    <div class="grip">≡</div>
+                                    <input class="input-line" maxlength="40" value="최대문자수는 40자로 제한됩니다." />
+                                    <div class="actions">
+                                        <span class="counter">18/40</span>
+                                        <button type="button" class="icon" data-act="add">＋</button>
+                                        <button type="button" class="icon" data-act="del">✕</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clip-side">
+                                <div class="badge-time">52"</div>
+                            </div>
+
+                            <button type="button" class="btn small btn-del-clip absol" data-act="clip-del"><img src="assets/img/ico/ico-close-gray.svg" alt="닫기"></button>
+                        </div>
+
+                        <!-- Clip 3 -->
+                        <div class="clip" draggable="true" data-cidx="2">
+                            <div class="clip-index">3</div>
+                            <label class="thumb" title="썸네일 선택">
+                                <span>썸네일</span>
+                                <input type="file" accept="image/*" />
+                            </label>
+                            <div class="lines">
+                                <div class="line" draggable="true" data-cidx="2" data-lidx="0">
+                                    <div class="grip">≡</div>
+                                    <input class="input-line" maxlength="40" value="맛집마다 각기 다른 특징과 매력이 있습니다." />
+                                    <div class="actions">
+                                        <span class="counter">19/40</span>
+                                        <button type="button" class="icon" data-act="add">＋</button>
+                                        <button type="button" class="icon" data-act="del">✕</button>
+                                    </div>
+                                </div>
+                                <div class="line" draggable="true" data-cidx="2" data-lidx="1">
+                                    <div class="grip">≡</div>
+                                    <input class="input-line" maxlength="40" value="오랜 전통의 사천식관은 중화요리 전문점입니다." />
+                                    <div class="actions">
+                                        <span class="counter">21/40</span>
+                                        <button type="button" class="icon" data-act="add">＋</button>
+                                        <button type="button" class="icon" data-act="del">✕</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clip-side">
+                                <div class="badge-time">41"</div>
+                            </div>
+
+                            <button type="button" class="btn small btn-del-clip absol" data-act="clip-del"><img src="assets/img/ico/ico-close-gray.svg" alt="닫기"></button>
+                        </div>
+
+                        <!-- Clip 4 -->
+                        <div class="clip" draggable="true" data-cidx="3">
+                            <div class="clip-index">4</div>
+                            <label class="thumb" title="썸네일 선택">
+                                <span>썸네일</span>
+                                <input type="file" accept="image/*" />
+                            </label>
+                            <div class="lines">
+                                <div class="line" draggable="true" data-cidx="3" data-lidx="0">
+                                    <div class="grip">≡</div>
+                                    <input class="input-line" maxlength="40" value="후식까지 완벽한 코스로 구성되어 있습니다." />
+                                    <div class="actions">
+                                        <span class="counter">20/40</span>
+                                        <button type="button" class="icon" data-act="add">＋</button>
+                                        <button type="button" class="icon" data-act="del">✕</button>
+                                    </div>
+                                </div>
+                                <div class="line" draggable="true" data-cidx="3" data-lidx="1">
+                                    <div class="grip">≡</div>
+                                    <input class="input-line" maxlength="40" value="소스는 달지 않고 깔끔한 뒷맛이 장점입니다." />
+                                    <div class="actions">
+                                        <span class="counter">21/40</span>
+                                        <button type="button" class="icon" data-act="add">＋</button>
+                                        <button type="button" class="icon" data-act="del">✕</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clip-side">
+                                <div class="badge-time">59"</div>
+                            </div>
+
+                            <button type="button" class="btn small btn-del-clip absol" data-act="clip-del"><img src="assets/img/ico/ico-close-gray.svg" alt="닫기"></button>
+                        </div>
+
+                    </div>
+
+                    <!-- 최하단 추가/드롭존 -->
+                    <div class="add-clip"><button class="btn ghost" id="btn-add-clip">+ 클립 추가</button></div>
+                    <div class="drop-zone" id="dropZone">+ 클립 추가</div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 오른쪽 : 상단 고정 / 세로 가변 / 하단 고정 -->
+        <aside class="panel right">
+            <div class="panel-body right-grid">
+                <!-- grid: [고정] [가변] [고정] -->
+
+                <!-- ▣ 상단 : 사이즈 고정 -->
+                <div class="right-top">
+                    <section class="section">
+                        <h2 class="right-title title fc-primary-green tal">AI 스타일</h2>
+
+                        <div class="control">
+                            <div class="control-label"><img class="icon" alt="아이콘"><span>AI 목소리</span></div>
+                            <div class="control-field">
+                                <select id="ai-voice" class="select">
+                                    <option>남 | 뉴스앵커</option>
+                                    <option>여 | 담백</option>
+                                    <option>여 | 친근함</option>
+                                    <option>남 | 경쾌</option>
+                                    <option>남 | 차분</option>
+                                </select>
+                                <button type="button" class="btn-icon"><img class="icon" alt="아이콘"></button>
+                            </div>
+                        </div>
+
+                        <div class="control">
+                            <div class="control-label"><img class="icon" alt="아이콘"><span>AI 말투</span></div>
+                            <div class="control-field">
+                                <select id="ai-tone" class="select">
+                                    <option>정색</option>
+                                    <option>해설</option>
+                                    <option>광고톤</option>
+                                    <option>브이로그</option>
+                                </select>
+                                <button type="button" class="btn-icon"><img class="icon" alt="아이콘"></button>
+                            </div>
+                        </div>
+
+                        <div class="control">
+                            <div class="control-label"><img class="icon" alt="아이콘"><span>재생 속도</span></div>
+                            <div class="control-field"><input id="playback" class="range" type="range" min="0.5" max="1.5" step="0.05" value="1"></div>
+                        </div>
+                    </section>
+
+                    <hr class="right-sep">
+
+                    <section class="section">
+                        <h3 class="section-title title fc-primary-green tal">영상 편집</h3>
+
+                        <div class="control">
+                            <div class="control-label"><img class="icon" alt="아이콘"><span>비율</span></div>
+                            <div class="control-field">
+                                <div class="ratio-row" id="ratioRow">
+                                    <button class="pill active" data-ratio="16:9">16:9</button>
+                                    <button class="pill" data-ratio="4:3">4:3</button>
+                                    <button class="pill" data-ratio="1:1">1:1</button>
+                                    <button class="pill" data-ratio="9:16">9:16</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="control">
+                            <div class="control-label"><img class="icon" alt="아이콘"><span>템플릿</span></div>
+                            <div class="control-field">
+                                <input id="templateName" class="input" placeholder="템플릿 변경" readonly>
+                                <button class="btn" id="btn-template">템플릿 변경</button>
+                            </div>
+                        </div>
+
+                        <div class="control">
+                            <div class="control-label"><img class="icon" alt="아이콘"><span>배경음악</span></div>
+                            <div class="control-field">
+                                <select id="bgm" class="select">
+                                    <option>밝고 경쾌함</option>
+                                    <option>차분한 피아노</option>
+                                    <option>리듬 강조</option>
+                                    <option>없음</option>
+                                </select>
+                                <button type="button" class="btn-icon"><img class="icon" alt="아이콘"></button>
+                            </div>
+                        </div>
+
+                        <div class="control">
+                            <div class="control-label"><img class="icon" alt="아이콘"><span>타이틀</span></div>
+                            <div class="control-field checks">
+                                <label class="check"><input type="checkbox" id="opt-sub" checked> 서브</label>
+                                <label class="check"><input type="checkbox" id="opt-main" checked> 메인</label>
+                                <label class="check"><input type="checkbox" id="opt-caption"> 하단</label>
+                                <label class="check"><input type="checkbox" disabled> 로고</label>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <!-- // 상단 고정 -->
+
+                <!-- ▣ 중앙 : 세로 가변 (미리보기 섹션 + 라벨 표시) -->
+                <div class="right-mid">
+                    <div class="preview-holder">
+                        <div class="preview-shell"><!-- 라벨 고정 + 스테이지 -->
+                            <!-- 좌측 라벨 -->
+                            <ul class="markers" aria-hidden="true">
+                                <li class="marker marker-sub">서브</li>
+                                <li class="marker marker-main">메인</li>
+                                <li class="marker marker-bottom">하단</li>
+                                <li class="marker marker-logo">로고</li>
+                            </ul>
+
+                            <!-- 실제 캔버스(비율 유지 / 기존 JS 그대로) -->
+                            <div id="preview" class="stage ratio-9-16">
+                                <!-- 서브 -->
+                                <div class="layer layer-sub" aria-label="서브">
+                                    <div class="sub-chip">자연 속에서의 힐링을 느껴보세요!</div>
+                                    <div class="sub-badge">특종</div>
+                                </div>
+                                <!-- 메인 (JS가 이 텍스트만 갱신) -->
+                                <div class="layer layer-main" aria-label="메인">
+                                    <div id="previewText" class="headline">선택한 문장이 이곳에 표시됩니다.</div>
+                                </div>
+                                <!-- 중앙 이미지 -->
+                                <div class="layer layer-media" aria-label="중앙 이미지">
+                                    <div class="media-box"><img class="icon" alt="아이콘"></div>
+                                </div>
+                                <!-- 하단 -->
+                                <div class="layer layer-bottom" aria-label="하단">
+                                    <div class="caption">여러분의 캠핑 이야기도 들려주세요!</div>
+                                </div>
+                                <!-- 로고 -->
+                                <div class="layer layer-logo" aria-label="로고">
+                                    <div class="logo-box">LOGO</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- ▣ 하단 : 사이즈 고정 -->
+                <div class="right-foot">
+                    <button class="btn ghost" id="btn-cancel">취소하기</button>
+                    <button class="btn primary" id="btn-generate">
+                        <img src="assets/img/ico/ico-effect-blue.svg" alt="effect"/>
+                        <span>
+                        숏폼 생성하기
+                        </span>
+                    </button>
+                </div>
+
+            </div>
+        </aside>
+    </div>
+
+    <div id="layer-root" aria-live="polite"></div>
+
+    <!-- HTML 템플릿(추가 시 복제용) -->
+    <template id="tpl-clip">
+        <div class="clip" draggable="true" data-cidx="">
+            <div class="clip-index"></div>
+            <label class="thumb" title="썸네일 선택">
+                <span>썸네일</span>
+                <input type="file" accept="image/*" />
+            </label>
+            <div class="line" draggable="true" data-cidx="2" data-lidx="1">
+                <div class="grip">≡</div>
+                <input class="input-line" maxlength="40" value="" />
+                <div class="actions">
+                    <span class="counter"></span>
+                    <button type="button" class="icon" data-act="add">＋</button>
+                    <button type="button" class="icon" data-act="del">✕</button>
+                </div>
+            </div>
+            <div class="clip-side">
+                <div class="badge-time">0"</div>
+            </div>
+            <button type="button" class="btn small btn-del-clip absol" data-act="clip-del"><img src="assets/img/ico/ico-close-gray.svg" alt="닫기"></button>
+        </div>
+    </template>
+
+    <template id="tpl-line">
+        <div class="line" draggable="true" data-cidx="" data-lidx="">
+            <div class="grip">≡</div>
+            <input class="input-line" maxlength="40" value="" />
+            <div class="actions">
+                <span class="counter">0/40</span>
+                <button type="button" class="icon" data-act="add">＋</button>
+                <button type="button" class="icon" data-act="del">✕</button>
+            </div>
+        </div>
+    </template>
+
+    <script src="assets/js/edit.js"></script>
+</body>
+
+</html>
