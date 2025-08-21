@@ -1,23 +1,103 @@
+/* __root.css */
+
 :root {
-    --root-font-color:#000000;
-    --menu-font-color:#000000;
-    --primary-color-green: #4DF293;
-    --primary-color-blue: #6A77F0;
-    --bg: #1B1E2C;
-    --panel: #151a2a;
-    --panel2: #1c2238;
-    --panel3: #0c1122;
-    --text: #EAEFED;
-    --muted: #9aa3c8;
-    --accent: #7aa2ff;
-    --accent2: #b073ff;
-    --danger: #ff6b6b;
-    --border: rgba(54, 54, 57, 1);
-    --radius: 14px;
-    --shadow: 0 8px 24px rgba(0, 0, 0, .35);
+    /* ========================================
+    Color Palette (색상)
+    ========================================
+    */
+    /* Core Colors */
+    --color-background: #14151a; /* 앱 전체의 기본 배경색 */
+    --color-surface-1: #1f2128; /* 카드, 모달 등 기본 배경보다 한 단계 밝은 표면색 */
+    --color-surface-2: #2c2f37; /* 활성화된 요소나 좀 더 강조된 표면색 */
+
+    /* Primary (Main Green) */
+    --color-primary: #19f8a3; /* '숏폼 생성' 버튼, D-365 태그 등 핵심 강조색 */
+    --color-primary-hover: #62ffc3; /* 호버 시 밝아지는 색 */
+    --color-primary-active: #aeffe1; /* 클릭 시 더 밝아지는 색 */
+
+    /* Secondary (Main Blue/Purple) */
+    --color-secondary: #5865f2; /* '이용권 구매', '삭제하기' 등 보조 버튼색 */
+    --color-secondary-hover: #7b85f5;
+    --color-secondary-active: #4a57e8;
+
+    /* Text Colors */
+    --color-text-primary: #ffffff; /* 기본 흰색 텍스트 */
+    --color-text-secondary: #a0a2a8; /* 부가 설명 등 연한 회색 텍스트 */
+    --color-text-placeholder: #6a6d73; /* 입력창 placeholder 텍스트 */
+    --color-text-link: #ff6b6b; /* 오른쪽 메뉴의 붉은색 링크 텍스트 */
+
+    /* Border & Divider */
+    --color-border: #3a3d46; /* 컴포넌트 외곽선, 구분선 */
+    --color-border-dotted: #4d5059; /* '숏폼 생성' 점선 테두리 */
+    --color-border-active: var(--color-primary); /* 활성화된 컴포넌트 테두리 */
+
+    /* Misc Colors */
+    --color-disabled: #4e5057; /* 비활성화된 버튼, UI 요소 */
+    --color-danger: #e53e3e; /* 삭제, 위험 등을 나타내는 붉은색 */
+    --color-thumbnail-bg: #ff7070; /* 썸네일 플레이스홀더의 붉은 배경 */
+    --color-black-alpha-50: rgba(0, 0, 0, 0.5); /* 모달 뒷 배경 어둡게 처리 */
+
+
+    /* ========================================
+    Typography (폰트)
+    ========================================
+    */
     --basic-font-famaily:"Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
 
-    --right-top-h: 480px;     /* 상단 고정 높이 (원하면 수치만 바꿔) */
-    --right-bottom-h: 89px;   /* 하단 고정 높이 */
-    --card-w: 440px;
+    /* Font Sizes */
+    --font-size-xl: 2.4rem;  /* 24px, '최근 작업' 같은 섹션 타이틀 */
+    --font-size-lg: 2.0rem;  /* 20px */
+    --font-size-md: 1.6rem;  /* 16px, 기본 폰트 크기 */
+    --font-size-sm: 1.4rem;  /* 14px, 부가 설명 텍스트 */
+    --font-size-xs: 1.2rem;  /* 12px, 가장 작은 텍스트 */
+
+    /* Font Weights */
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+
+
+    /* ========================================
+    Spacing & Sizing (간격 및 크기)
+    ========================================
+    */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 48px;
+
+
+    /* ========================================
+    Border & Radius (테두리)
+    ========================================
+    */
+    --radius-sm: 4px;     /* 작은 버튼, 태그 */
+    --radius-md: 8px;     /* 카드, 입력창, 모달 */
+    --radius-lg: 12px;    /* 더 큰 컨테이너 */
+    --radius-circle: 50%;
+
+    --border-base: 1px solid var(--color-border);
+    --border-dotted: 1px dotted var(--color-border-dotted);
+
+
+    /* ========================================
+    Effects (효과)
+    ========================================
+    */
+    /* 로그인 팝업, 모달 등에 사용된 그림자 */
+    --shadow-modal: 0 4px 20px rgba(0, 0, 0, 0.25);
+    /* UI 요소들의 부드러운 전환 효과 */
+    --transition-fast: all 0.2s ease-in-out;
+
+
+    /* ========================================
+    Z-Index (레이어 순서)
+    ========================================
+    */
+    --z-index-dropdown: 1000;
+    --z-index-modal-backdrop: 2000;
+    --z-index-modal: 2001;
+    --z-index-header: 500;
 }

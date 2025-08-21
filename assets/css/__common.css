@@ -1,52 +1,170 @@
+/* __common.css */
 
-/*align*/
+/* ===================================================================
+   Part 1: Utility Classes (사용자 지정 유틸리티)
+   - 기존에 사용하시던 클래스 구조를 기반으로 재구성 및 확장했습니다.
+=================================================================== */
+
+/* Align & Flexbox */
 .lh1{ line-height: 1}
 .tac{ text-align: center}
 .tal{ text-align: left}
 .tar{ text-align: right}
-.flex{ display: flex; flex-wrap: wrap}
-.flex-col{ display: flex; flex-direction: column;}
-.inline-flex {display: inline-flex !important; flex-wrap: wrap}
-.flex-jc{ display: flex; flex-wrap: wrap; justify-content: center}
-.flex-js{ display: flex; flex-wrap: wrap; justify-content: flex-start}
-.flex-je{ display: flex; flex-wrap: wrap; justify-content: flex-end}
-.flex-jl{ display: flex; flex-wrap: wrap; justify-content: left}
-.flex-jr{ display: flex; flex-wrap: wrap; justify-content: right}
-.flex-jsb{ display: flex; flex-wrap: wrap; justify-content: space-between}
-.flex-jsa{ display: flex; flex-wrap: wrap; justify-content: space-around}
-.flex-ac{ display: flex; flex-wrap: wrap; align-items: center}
-.flex-ae{ display: flex; flex-wrap: wrap; align-items: flex-end}
-.flex-afs { display: flex; flex-wrap: wrap; align-items: flex-start}
-.flex-ast { display: flex; align-items: stretch}
-.flex-nowrap{ display: flex; flex-wrap: nowrap;}
-.flex-now{ display: flex}
-.flex-now-jc{ display: flex; justify-content: center}
-.flex-now-jsb{ display: flex; justify-content: space-between}
-.flex-now-jsa{ display: flex; justify-content: space-around}
 
-/* color */
-.fc-primary-green {
-    color:var(--primary-color-green);
-}
-.fc-primary-blue {
-    color:var(--primary-color-blue);
-}
+.flex{ display: flex; flex-wrap: wrap; }
+.flex-col{ display: flex; flex-direction: column; }
+.inline-flex { display: inline-flex; flex-wrap: wrap; }
+.flex-nowrap{ display: flex; flex-wrap: nowrap; }
 
+/* Justify Content */
+.flex-jc{ justify-content: center; }
+.flex-js{ justify-content: flex-start; }
+.flex-je{ justify-content: flex-end; }
+.flex-jsb{ justify-content: space-between; }
+.flex-jsa{ justify-content: space-around; }
+
+/* Align Items */
+.flex-ac{ align-items: center; }
+.flex-ae{ align-items: flex-end; }
+.flex-as{ align-items: flex-start; } /* 'afs' 대신 'as'로 축약 통일 */
+.flex-ast{ align-items: stretch; }
+
+/* ❗️추가: Flex + Justify + Align 조합 */
+.flex-center { display: flex; justify-content: center; align-items: center; }
+
+/* Position */
+.relative { position: relative; }
+.absol { position: absolute; }
+.fixed { position: fixed; }
+.sticky { position: sticky; }
+
+/* Colors */
+/* ❗️변경: 기존 클래스 이름은 유지하되, __root.css에 정의된 변수를 사용하도록 수정 */
+.fc-primary { color: var(--color-primary); } /* 기존 fc-primary-green */
+.fc-secondary { color: var(--color-secondary); } /* 기존 fc-primary-blue */
+.fc-white { color: var(--color-text-primary); }
+.fc-gray { color: var(--color-text-secondary); }
+.fc-red { color: var(--color-text-link); }
+
+/* Background Colors */
+.bg-primary { background-color: var(--color-primary); }
+.bg-secondary { background-color: var(--color-secondary); }
+.bg-surface-1 { background-color: var(--color-surface-1); }
+.bg-surface-2 { background-color: var(--color-surface-2); }
+
+
+/* ❗️추가: Spacing (margin, padding) 유틸리티 */
+/* __root.css의 --spacing 변수를 사용합니다. 예: .mt-md -> margin-top: 16px */
+.m-0 { margin: 0; }
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+.mr-sm { margin-right: var(--spacing-sm); }
+.mr-md { margin-right: var(--spacing-md); }
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+.ml-sm { margin-left: var(--spacing-sm); }
+.ml-md { margin-left: var(--spacing-md); }
+
+.p-0 { padding: 0; }
+.p-sm { padding: var(--spacing-sm); }
+.p-md { padding: var(--spacing-md); }
+.p-lg { padding: var(--spacing-lg); }
+.px-md { padding-left: var(--spacing-md); padding-right: var(--spacing-md); }
+.py-md { padding-top: var(--spacing-md); padding-bottom: var(--spacing-md); }
+
+/* ❗️추가: Gap 유틸리티 */
+.gap-sm { gap: var(--spacing-sm); }
+.gap-md { gap: var(--spacing-md); }
+.gap-lg { gap: var(--spacing-lg); }
+
+/* Others */
 hr {
     height: 1px;
-    background: var(--border);
-    border:none;
+    background: var(--color-border);
+    border: none;
+    margin: var(--spacing-md) 0;
+}
+.w-100 { width: 100%; }
+.h-100 { height: 100%; }
+
+
+/* ===================================================================
+   Part 2: Global Components (공통 컴포넌트)
+   - 버튼, 모달 등 여러 페이지에서 재사용되는 UI 요소 스타일입니다.
+=================================================================== */
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-bold);
+    border-radius: var(--radius-sm);
+    transition: var(--transition-fast);
+    white-space: nowrap;
+}
+.btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-background);
+}
+/* ... (이하 버튼, 모달 등 이전 답변의 컴포넌트 스타일과 동일) ... */
+/* Forms */
+.form-control {
+    width: 100%;
+    padding: var(--spacing-md);
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    color: var(--color-text-primary);
+    font-size: var(--font-size-md);
+    transition: var(--transition-fast);
+}
+.form-control:focus {
+    border-color: var(--color-primary);
 }
 
-.absol {
-    position: absolute;
-}
-.relative {
-    position: relative;
-}
-.sticky {
-    position: sticky;
-}
-.fixed {
+/* Modals */
+.modal-overlay {
     position: fixed;
+    inset: 0;
+    background-color: var(--color-black-alpha-50);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: var(--z-index-modal-backdrop);
+    animation: fadeIn 0.3s ease-out forwards;
 }
+.modal-content {
+    background-color: var(--color-surface-1);
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-modal);
+    width: 90%;
+    max-width: 480px;
+}
+/* ... (이하 모달 관련 스타일) ... */
+
+/* Tabs */
+.tabs-container {
+    display: flex;
+    gap: var(--spacing-md);
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: var(--spacing-lg);
+}
+.tab-item {
+    padding: var(--spacing-sm) var(--spacing-md);
+    font-size: var(--font-size-md);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    border-bottom: 2px solid transparent;
+    transform: translateY(1px);
+}
+.tab-item.is-active {
+    color: var(--color-primary);
+    border-bottom-color: var(--color-primary);
+}
+/* ... (이하 탭 관련 스타일) ... */

@@ -1,0 +1,58 @@
+/* __animation.css */
+
+/*
+ * 부드럽게 나타나는 효과 (모달, 팝업용)
+ * 사용법: <div class="fade-in">...</div>
+*/
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+
+/*
+ * ❗️로딩 큐브 애니메이션
+ * 사용법:
+ * <div class="loading-cube-container">
+ * <div class="loading-cube"></div>
+ * </div>
+*/
+@keyframes cube-spin {
+    0% {
+        transform: rotateX(-35deg) rotateY(-45deg);
+    }
+    50% {
+        transform: rotateX(-35deg) rotateY(-225deg);
+    }
+    100% {
+        transform: rotateX(-35deg) rotateY(-405deg);
+    }
+}
+
+.loading-cube-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px; /* 3D 효과를 위한 원근감 설정 */
+}
+
+.loading-cube {
+    width: 50px;
+    height: 50px;
+    background-color: var(--color-secondary);
+    animation: cube-spin 2s infinite linear;
+    transform-style: preserve-3d;
+}
+
+/* 기타 호버, 클릭 효과는 __root.css의 transition 변수와
+   개별 컴포넌트 CSS에서 :hover, :active 가상 클래스를 조합해 사용하는 것을 권장합니다. */
