@@ -522,6 +522,56 @@
     if (_logo) _logo.addEventListener("change", function(){ applyPreviewToggles(); });
 
 
+    /* === LAYER POPUP 트리거 === */
+    // 클립 생성 진행(스텝퍼)
+    $("#btn-make-clips")?.addEventListener("click", ()=> Layer.open("clips-progress"));
+
+    // 이미지/비디오 선택 피커
+    document.addEventListener("click", (e)=>{
+        const b = e.target.closest("[data-open-picker]");
+        if(!b) return;
+        Layer.open("content-picker");
+    });
+
+    // 취소하기
+    $("#btn-cancel")?.addEventListener("click", ()=> Layer.open("shortform-cancel"));
+
+    /* === 레이어별 로직 (edit 전용) === */
+    document.addEventListener("layer:opened", (e)=>{
+        const { name, el } = e.detail;
+
+        if(name === "clips-progress"){
+            // TODO: 단계 진행 애니메이션/상태 갱신
+        }
+
+        if(name === "content-picker"){
+            // 검색, 탭 전환, 썸네일 선택 등 바인딩
+            // el.querySelector('.tabs') ... 구현 지점
+            el.addEventListener("click", (ev)=>{
+                const actBtn = ev.target.closest("[data-act]");
+                if(!actBtn) return;
+                if(actBtn.dataset.act === "apply"){
+                    // TODO: 선택된 리소스 적용
+                    Layer.close(el);
+                }else if(actBtn.dataset.act === "cancel"){
+                    Layer.close(el);
+                }
+            });
+        }
+
+        if(name === "shortform-cancel"){
+            el.addEventListener("click", (ev)=>{
+                const b = ev.target.closest("[data-act]"); if(!b) return;
+                if(b.dataset.act === "continue"){
+                    Layer.close(el); // 계속하기
+                }else if(b.dataset.act === "cancel"){
+                    Layer.close(el); // 팝업 닫기
+                }
+            });
+        }
+    });
+
+
     // 초기화
     (function init() {
         setRatio("9:16");
